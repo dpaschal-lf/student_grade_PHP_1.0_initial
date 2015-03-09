@@ -47,9 +47,9 @@ $students = [
     for($i = 0; $i<count($students); $i++)
     {
         echo "<tr>
-            <td>William Shatner</td>
-            <td>Ethics & the Chain of Command</td>
-            <td>69</td>
+            <td>".$students[$i]['name']."</td>
+            <td>".$students[$i]['Class']."</td>
+            <td>".$students[$i]['Grade']."</td>
         </tr>";
     }
 ?>
