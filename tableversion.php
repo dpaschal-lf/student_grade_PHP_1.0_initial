@@ -1,17 +1,23 @@
 <!doctype html>
 <?php
-$students = [
-    ['name'=>'George Takei', 'Class'=>'Warp Physics', 'Grade'=>75],
-    ['name'=>'Leonard Nimoy', 'Class'=>'Anger Management', 'Grade'=>98],
-    ['name'=>'William Shatner', 'Class'=>'Ethics & the Chain of Command', 'Grade'=>69],
-    ['name'=>'James Doohan', 'Class'=>'Warp Physics', 'Grade'=>92],
-    ['name'=>'George Takei', 'Class'=>'Piloting', 'Grade'=>95],
-    ['name'=>'Leonard Nimoy', 'Class'=>'Warp Physics', 'Grade'=>95],
-    ['name'=>'Deforest Kelley', 'Class'=>'Botony', 'Grade'=>85],
-    ['name'=>'Nichelle Nichols', 'Class'=>'Communications', 'Grade'=>95],
-    ['name'=>'Zoe Saldana', 'Class'=>'Communications', 'Grade'=>35],
-    ['name'=>'William Shatner', 'Class'=>'Trible Care', 'Grade'=>100],
-];
+require_once('includes/data.php');
+
+$highest = $students[0]['Grade'];
+$lowest = $students[0]['Grade'];
+$grade_total = 0;
+for($i = 1 ; $i< count($students); $i++)
+{
+    if($students[$i]['Grade']>$highest)
+    {
+        $highest = $students[$i]['Grade'];
+    }
+    if($students[$i]['Grade']<$lowest)
+    {
+        $lowest = $students[$i]['Grade'];
+    }
+    $grade_total+=$students[$i]['Grade'];
+}
+$average = $grade_total / count($students);
 ?>
 <html>
 <head>
@@ -24,6 +30,20 @@ $students = [
 #student_grade_table tr:nth-child(even){
     background-color: lightgray;;
 }
+.lowest_row{
+    background-color: red!important;
+}
+.highest_row{
+    background-color: green!important;
+}
+.average_row{
+    font-weight: bold;
+    background-color: black!important;
+    color: white;
+}
+.function_row{
+    text-align: center;
+}
 </style>
 </head>
 <body>
@@ -32,27 +52,36 @@ $students = [
             <td>Name</td>
             <td>Class</td>
             <td>Grade</td>
-        </tr>
-        <tr>
-            <td>George Takei</td>
-            <td>Warp Physics</td>
-            <td>75</td>
-        </tr>
-        <tr>
-            <td>Leonard Nimoy</td>
-            <td>Anger Management</td>
-            <td>98</td>
+            <td>Functions</td>
         </tr>
 <?php
     for($i = 0; $i<count($students); $i++)
     {
-        echo "<tr>
+        $row_class='';
+        if($students[$i]['Grade']==$lowest)
+        {
+            $row_class='lowest_row';
+        }
+        if($students[$i]['Grade']==$highest)
+        {
+            $row_class='highest_row';
+        }
+        echo "<tr class='".$row_class."'>
             <td>".$students[$i]['name']."</td>
             <td>".$students[$i]['Class']."</td>
             <td>".$students[$i]['Grade']."</td>
+            <td class='function_row'><button type='button'>X</button></td>
         </tr>";
     }
+    echo "The class average is $average";
 ?>
+        <tr class='average_row'>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><?php echo $average;?></td>
+            <td>&nbsp;</td>
+        </tr>
+        
     </table>
 
 

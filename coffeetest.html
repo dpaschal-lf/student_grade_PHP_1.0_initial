@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+<body>
+<div id="coffeecounter"></div>
+<script>
+var coffee_count = 0;
+coffee_count = prompt("How many coffees do you get from your caffeine overlord Starbucks?");
+tea_count = prompt("And how many teas do you get from there, too?");
+display_coffee_count(coffee_count,tea_count);
+    
+    
+    
+function display_coffee_count(number_of_coffees, number_of_teas)
+{
+    document.getElementById('coffeecounter').innerHTML="You have had "+number_of_coffees+" coffees and "+number_of_teas+" teas from starbucks";
+}
+</script>
+
+</body>
+</html>
